@@ -1,5 +1,6 @@
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import { PasswordInput } from "../components/ui/password-input";
 import { Card } from "../components/ui/card";
 import { Label } from "../components/ui/label";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -150,9 +151,8 @@ export function ResetPassword() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="password">New Password</Label>
-                <Input
+                <PasswordInput
                   id="password"
-                  type="password"
                   placeholder="••••••••"
                   className="bg-input-background"
                   value={password}
@@ -164,9 +164,8 @@ export function ResetPassword() {
               
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                <Input
+                <PasswordInput
                   id="confirmPassword"
-                  type="password"
                   placeholder="••••••••"
                   className="bg-input-background"
                   value={confirmPassword}

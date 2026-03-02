@@ -32,6 +32,17 @@ import { ResetPassword } from '@/app/pages/ResetPassword';
 // Coming Soon Page
 import { ComingSoon } from '@/app/pages/ComingSoon';
 
+import { OnboardingWelcome } from '@/app/pages/onboarding/Welcome';
+import { OnboardingProfileSetup } from '@/app/pages/onboarding/ProfileSetup';
+import { OnboardingWellnessBaseline } from '@/app/pages/onboarding/WellnessBaseline';
+import { OnboardingHealthBackground } from '@/app/pages/onboarding/HealthBackground';
+import { OnboardingAvatarPreferences } from '@/app/pages/onboarding/AvatarPreferences';
+import { OnboardingEmergencyContact } from '@/app/pages/onboarding/EmergencyContact';
+import { OnboardingPermissions } from '@/app/pages/onboarding/Permissions';
+import { OnboardingSafetyConsent } from '@/app/pages/onboarding/SafetyConsent';
+import { OnboardingSubscription } from '@/app/pages/onboarding/Subscription';
+import { OnboardingComplete } from '@/app/pages/onboarding/Complete';
+
 // User App Pages
 import { Dashboard } from '@/app/pages/app/Dashboard';
 
@@ -177,7 +188,20 @@ export default function App() {
           <Route element={<ProtectedRoute><Outlet /></ProtectedRoute>}>
             <Route element={<OnboardingProvider><Outlet /></OnboardingProvider>}>
               {/* Onboarding Routes */}
-              <Route path="/onboarding/*" element={<ComingSoon />} />
+              <Route path="/onboarding">
+                <Route index element={<Navigate to="/onboarding/welcome" replace />} />
+                <Route path="welcome" element={<OnboardingWelcome />} />
+                <Route path="profile-setup" element={<OnboardingProfileSetup />} />
+                <Route path="wellness-baseline" element={<OnboardingWellnessBaseline />} />
+                <Route path="health-background" element={<OnboardingHealthBackground />} />
+                <Route path="avatar-preferences" element={<OnboardingAvatarPreferences />} />
+                <Route path="emergency-contact" element={<OnboardingEmergencyContact />} />
+                <Route path="permissions" element={<OnboardingPermissions />} />
+                <Route path="safety-consent" element={<OnboardingSafetyConsent />} />
+                <Route path="subscription" element={<OnboardingSubscription />} />
+                <Route path="complete" element={<OnboardingComplete />} />
+                <Route path="*" element={<Navigate to="/onboarding/welcome" replace />} />
+              </Route>
             </Route>
           
             {/* App Routes */}

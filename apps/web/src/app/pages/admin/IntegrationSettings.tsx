@@ -24,6 +24,7 @@ import {
 import { useState } from "react";
 import { Card } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
+import { PasswordInput } from "@/app/components/ui/password-input";
 
 interface Integration {
   id: string;
@@ -715,8 +716,7 @@ export function IntegrationSettings() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">API Key</label>
-                  <input
-                    type="password"
+                  <PasswordInput
                     placeholder="Enter API key"
                     className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none"
                   />
@@ -781,8 +781,7 @@ export function IntegrationSettings() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">API Key</label>
-                  <input
-                    type="password"
+                  <PasswordInput
                     defaultValue={selectedIntegration.apiKey}
                     className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none"
                   />

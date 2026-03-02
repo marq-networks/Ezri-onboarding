@@ -5,6 +5,7 @@ import { Heart, ArrowRight, Shield, Crown, Building2, Users, Home, ArrowLeft, Lo
 import { Card } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
+import { PasswordInput } from "../../components/ui/password-input";
 import { Label } from "../../components/ui/label";
 import { FloatingElement } from "../../components/FloatingElement";
 import { toast } from "sonner";
@@ -381,9 +382,8 @@ export function AdminLogin() {
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password">Password</Label>
                   </div>
-                  <Input
+                  <PasswordInput
                     id="password"
-                    type="password"
                     placeholder="Enter admin password"
                     className="bg-input-background transition-all focus:scale-[1.02]"
                     value={password}

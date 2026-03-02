@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import { PasswordInput } from "../components/ui/password-input";
 import { Card } from "../components/ui/card";
 import { Label } from "../components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
@@ -348,9 +349,8 @@ export function Signup() {
                   className="space-y-2"
                 >
                   <Label htmlFor="password">Password</Label>
-                  <Input
+                  <PasswordInput
                     id="password"
-                    type="password"
                     placeholder="At least 8 characters"
                     className="bg-input-background transition-all focus:scale-[1.02]"
                     value={password}
@@ -367,9 +367,8 @@ export function Signup() {
                   className="space-y-2"
                 >
                   <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input
+                  <PasswordInput
                     id="confirmPassword"
-                    type="password"
                     placeholder="Re-enter your password"
                     className="bg-input-background transition-all focus:scale-[1.02]"
                     value={confirmPassword}

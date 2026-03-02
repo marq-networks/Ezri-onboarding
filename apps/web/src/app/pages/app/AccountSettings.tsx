@@ -15,6 +15,7 @@ import {
   AlertCircle,
   Loader2
 } from "lucide-react";
+import { PasswordInput } from "@/app/components/ui/password-input";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { useState, useEffect, useRef } from "react";
@@ -855,8 +856,7 @@ export function AccountSettings() {
                 <div className="space-y-4 mb-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Current Password</label>
-                    <input
-                      type="password"
+                    <PasswordInput
                       value={passwordState.currentPassword}
                       onChange={(e) => setPasswordState({...passwordState, currentPassword: e.target.value})}
                       className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
@@ -865,8 +865,7 @@ export function AccountSettings() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">New Password</label>
-                    <input
-                      type="password"
+                    <PasswordInput
                       value={passwordState.newPassword}
                       onChange={(e) => setPasswordState({...passwordState, newPassword: e.target.value})}
                       className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
@@ -875,8 +874,7 @@ export function AccountSettings() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Confirm New Password</label>
-                    <input
-                      type="password"
+                    <PasswordInput
                       value={passwordState.confirmPassword}
                       onChange={(e) => setPasswordState({...passwordState, confirmPassword: e.target.value})}
                       className="w-full px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
