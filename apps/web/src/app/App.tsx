@@ -32,6 +32,9 @@ import { ResetPassword } from '@/app/pages/ResetPassword';
 // Coming Soon Page
 import { ComingSoon } from '@/app/pages/ComingSoon';
 
+// User App Pages
+import { Dashboard } from '@/app/pages/app/Dashboard';
+
 // Error Pages
 import { Error404 } from '@/app/pages/errors/Error404';
 import { Error500 } from '@/app/pages/errors/Error500';
@@ -178,6 +181,7 @@ export default function App() {
             </Route>
           
             {/* App Routes */}
+            <Route path="/app/dashboard" element={<Dashboard />} />
             <Route path="/app/*" element={<ComingSoon />} />
             
             {/* Admin Routes - Protected */}
