@@ -6,12 +6,14 @@ dotenv.config();
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
+// Warn instead of throw to allow app to start even if config is missing (for debugging/health checks)
 if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing SUPABASE_URL or SUPABASE_SERVICE_KEY env vars');
+  console.error('CRITICAL: Missing SUPABASE_URL or SUPABASE_SERVICE_KEY env vars. Supabase calls will fail.');
 }
 
 // Service role client - ADMIN ACCESS (Use carefully)
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
+// We cast to string to satisfy TS, but it will fail at runtime if empty, which is handled in controllers
+export const supabaseAdmin = createClient(supabaseUrl || '', supabaseServiceKey || '', {
   auth: {
     autoRefreshToken: false,
     persistSession: false

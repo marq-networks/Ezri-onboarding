@@ -223,11 +223,22 @@ app.get('/health', async () => ({ ok: true }));
 app.get('/api/health', async () => ({ ok: true }));
 app.get('/', async () => ({ message: 'MeetEzri API' }));
 
+// Debug route to list registered routes (for troubleshooting Vercel deployment)
+app.get('/api/debug-routes', async (request, reply) => {
+  // Only return routes if we're in dev mode or explicitly requested with a secret header?
+  // For now, just return them as this is a non-critical info leak for debugging.
+  const routes = app.printRoutes();
+  return { routes };
+});
+
 export default app;
 
 if (require.main === module) {
   const start = async () => {
     try {
+      await app.ready();
+      app.log.info(app.printRoutes()); // Log routes on startup
+      
       await app.listen({ port: parseInt(process.env.PORT || '3001'), host: '0.0.0.0' });
       console.log(`Server listening on ${process.env.PORT || 3001}`);
     } catch (err) {

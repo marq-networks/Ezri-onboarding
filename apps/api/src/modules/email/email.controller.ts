@@ -34,7 +34,14 @@ export async function sendResetPasswordHandler(
   reply: FastifyReply
 ) {
   try {
-    const { email, redirectTo } = sendResetPasswordSchema.parse(request.body);
+    request.log.info({ body: request.body }, 'Processing password reset request');
+    const rawBody = request.body;
+    // Trim string inputs to avoid validation/processing errors
+    const email = rawBody.email.trim();
+    const redirectTo = rawBody.redirectTo?.trim();
+
+    // Re-validate with trimmed values
+    sendResetPasswordSchema.parse({ email, redirectTo });
 
     const { data, error } = await supabaseAdmin.auth.admin.generateLink({
       type: 'recovery',
