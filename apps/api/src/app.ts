@@ -225,9 +225,17 @@ app.post('/api/email/reset-password', resetHandler);
 app.post('/email/reset-password', resetHandler); // In case /api is stripped
 app.post('/reset-password', resetHandler); // In case /api/email is stripped (unlikely)
 
+// Add GET handler for easier browser debugging
+app.get('/api/email/reset-password', async (req, reply) => {
+  return reply.code(405).send({ 
+    message: 'Method Not Allowed. Use POST to reset password.', 
+    hint: 'This route exists! You just need to use POST method.' 
+  });
+});
+
 // Health check routes
-app.get('/health', async () => ({ ok: true, version: '1.0.1-debug', timestamp: new Date().toISOString() }));
-app.get('/api/health', async () => ({ ok: true, version: '1.0.1-debug', timestamp: new Date().toISOString() }));
+app.get('/health', async () => ({ ok: true, version: '1.0.2-FINAL', timestamp: new Date().toISOString() }));
+app.get('/api/health', async () => ({ ok: true, version: '1.0.2-FINAL', timestamp: new Date().toISOString() }));
 app.get('/', async () => ({ message: 'MeetEzri API' }));
 
 // Debug route to list registered routes (for troubleshooting Vercel deployment)
