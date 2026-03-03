@@ -56,8 +56,8 @@ export function OnboardingEmergencyContact() {
 
   return (
     <OnboardingLayout
-      currentStep={6}
-      totalSteps={9}
+      currentStep={7}
+      totalSteps={8}
       title="Emergency Contact"
       subtitle="Help us keep you safe (optional but recommended)"
     >
@@ -226,7 +226,7 @@ export function OnboardingEmergencyContact() {
             </Button>
           </Link>
 
-          <div className="flex-1">
+          <Link to="/onboarding/permissions" className="flex-1">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -247,7 +247,7 @@ export function OnboardingEmergencyContact() {
                 />
               </Button>
             </motion.div>
-          </div>
+          </Link>
         </motion.div>
 
         <motion.p

@@ -36,8 +36,8 @@ export function OnboardingComplete() {
 
   return (
     <OnboardingLayout
-      currentStep={9}
-      totalSteps={9}
+      currentStep={8}
+      totalSteps={8}
       title="You're All Set! 🎉"
       subtitle="Your personalized wellness journey starts now"
     >

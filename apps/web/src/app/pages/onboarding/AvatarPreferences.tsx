@@ -98,13 +98,13 @@ export function OnboardingAvatarPreferences() {
 
   const handleContinue = () => {
     updateData({ selectedAvatar, selectedEnvironment });
-    navigate("/onboarding/emergency-contact");
+    navigate("/onboarding/safety-consent");
   };
 
   return (
     <OnboardingLayout
       currentStep={5}
-      totalSteps={9}
+      totalSteps={8}
       title="Choose Your AI Companion"
       subtitle="Select the AI companion who will support your wellness journey"
     >
@@ -306,14 +306,14 @@ export function OnboardingAvatarPreferences() {
           transition={{ delay: 1 }}
           className="flex gap-3"
         >
-          <Link to="/onboarding/health-background" className="flex-1">
+          <Link to="/onboarding/wellness-baseline" className="flex-1">
             <Button type="button" variant="outline" className="w-full group">
               <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
               Back
             </Button>
           </Link>
 
-          <div className="flex-1">
+          <Link to="/onboarding/safety-consent" className="flex-1">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -335,7 +335,7 @@ export function OnboardingAvatarPreferences() {
                 />
               </Button>
             </motion.div>
-          </div>
+          </Link>
         </motion.div>
       </div>
     </OnboardingLayout>
