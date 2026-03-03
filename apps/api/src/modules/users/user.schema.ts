@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const onboardingSchema = z.object({
   full_name: z.string().min(2).max(100).optional(),
   avatar_url: z.string().url().nullable().optional(),
-  role: z.enum(['user', 'therapist']).default('user'),
+  role: z.enum(['user', 'therapist', 'companion']).default('user'),
   pronouns: z.string().optional(),
   age: z.string().optional(),
   timezone: z.string().optional(),
