@@ -12,6 +12,7 @@ import { ProtectedRoute } from '@/app/components/ProtectedRoute';
 import { Toaster } from '@/app/components/ui/sonner';
 import { MobileMetaTags } from '@/app/components/MobileMetaTags';
 import { ThemeManager } from '@/app/components/ThemeManager';
+import { AppLayout } from '@/app/components/AppLayout';
 
 // Public Pages
 import { Landing } from '@/app/pages/Landing';
@@ -206,10 +207,10 @@ export default function App() {
           
             {/* App Routes */}
             <Route path="/app/dashboard" element={<Dashboard />} />
-            <Route path="/app/*" element={<ComingSoon />} />
+            <Route path="/app/*" element={<AppLayout><ComingSoon /></AppLayout>} />
             
             {/* Admin Routes - Protected */}
-            <Route path="/admin/*" element={<ComingSoon />} />
+            <Route path="/admin/*" element={<AppLayout><ComingSoon /></AppLayout>} />
           </Route>
 
           {/* Error Pages */}

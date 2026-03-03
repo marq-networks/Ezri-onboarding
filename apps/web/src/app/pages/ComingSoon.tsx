@@ -93,75 +93,9 @@ export const ComingSoon = () => {
           />
         </motion.div>
 
-        {/* Newsletter Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-20 w-full max-w-md mx-auto relative"
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 rounded-2xl blur opacity-25"></div>
-          <div className="bg-slate-900/90 backdrop-blur-xl p-8 rounded-2xl border border-slate-800 shadow-2xl relative overflow-hidden">
-             {/* Shine effect */}
-             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-            
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold text-white mb-2">Join the Waitlist</h3>
-              <p className="text-slate-400 text-sm">
-                Be the first to experience the future of mental wellness.
-              </p>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="relative z-10">
-              <div className="flex flex-col gap-3">
-                <div className="relative">
-                  <Input 
-                    type="email" 
-                    placeholder="Enter your email address" 
-                    className="bg-slate-950/50 border-slate-700 text-white placeholder:text-slate-600 focus-visible:ring-teal-500 h-12 pl-4 pr-4 rounded-xl transition-all duration-300 hover:border-slate-600"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className={cn(
-                    "h-12 rounded-xl text-base font-medium transition-all duration-500 shadow-lg shadow-teal-500/20",
-                    isSubmitted 
-                      ? "bg-green-500 hover:bg-green-600 text-white" 
-                      : "bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-white"
-                  )}
-                  disabled={isSubmitted}
-                >
-                  {isSubmitted ? (
-                    <span className="flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5" /> Added to Waitlist
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Notify Me <ArrowRight className="w-4 h-4" />
-                    </span>
-                  )}
-                </Button>
-              </div>
-            </form>
-          </div>
-        </motion.div>
+       
 
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-20 text-slate-600 text-sm flex items-center gap-6"
-        >
-          <span>&copy; {new Date().getFullYear()} MeetEzri</span>
-          <span className="w-1 h-1 rounded-full bg-slate-800" />
-          <a href="#" className="hover:text-slate-400 transition-colors">Privacy</a>
-          <a href="#" className="hover:text-slate-400 transition-colors">Terms</a>
-          <a href="#" className="hover:text-slate-400 transition-colors">Contact</a>
-        </motion.div>
+      
       </div>
     </div>
   );
