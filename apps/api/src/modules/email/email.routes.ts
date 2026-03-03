@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { sendEmailHandler } from './email.controller';
+import { sendEmailHandler, sendResetPasswordHandler } from './email.controller';
 
 export async function emailRoutes(fastify: FastifyInstance) {
   fastify.post(
@@ -9,5 +9,11 @@ export async function emailRoutes(fastify: FastifyInstance) {
       preHandler: [fastify.authenticate],
     },
     sendEmailHandler
+  );
+
+  fastify.post(
+    '/reset-password',
+    // No auth required as user can't login if they forgot password
+    sendResetPasswordHandler
   );
 }

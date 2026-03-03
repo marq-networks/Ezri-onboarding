@@ -27,12 +27,22 @@ export function ForgotPassword() {
         ? `${window.location.origin}/reset-password?context=admin`
         : `${window.location.origin}/reset-password`;
 
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo,
+      const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3001/api' : 'https://meet-ezri-api.vercel.app/api');
+
+      const response = await fetch(`${apiUrl}/email/reset-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          redirectTo,
+        }),
       });
 
-      if (error) {
-        throw error;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || 'Failed to send reset email');
       }
 
       setIsSubmitted(true);
