@@ -182,7 +182,7 @@ export function OnboardingSafetyConsent() {
             className="flex-1"
           >
             Back
-          </Button>>
+          </Button>
           <Button
             onClick={handleContinue}
             disabled={!agreed}
