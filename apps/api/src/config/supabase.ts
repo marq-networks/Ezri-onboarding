@@ -22,7 +22,7 @@ export const supabaseAdmin = createClient(supabaseUrl || '', supabaseServiceKey 
 
 // Helper to create a client for a specific user token (RLS context)
 export const createSupabaseUserClient = (jwt: string) => {
-  return createClient(supabaseUrl, process.env.SUPABASE_JWT_SECRET || '', { // Using JWT secret or anon key if preferred, but usually we just forward the token
+  return createClient(supabaseUrl || '', process.env.SUPABASE_JWT_SECRET || '', { // Using JWT secret or anon key if preferred, but usually we just forward the token
     global: {
       headers: {
         Authorization: `Bearer ${jwt}`
