@@ -84,6 +84,11 @@ export function UserProfile() {
     try {
       const profile = await api.getMe();
       console.log("Loaded profile data:", profile); // Debug logging
+      console.log("Specific fields:", {
+        phone: profile.phone,
+        pronouns: profile.pronouns,
+        timezone: profile.timezone
+      });
       setFormData({
         name: profile.full_name || "",
         email: profile.email || user?.email || "",

@@ -46,6 +46,7 @@ import { OnboardingComplete } from '@/app/pages/onboarding/Complete';
 
 // User App Pages
 import { Dashboard } from '@/app/pages/app/Dashboard';
+import { UserProfile } from '@/app/pages/app/UserProfile';
 
 // Error Pages
 import { Error404 } from '@/app/pages/errors/Error404';
@@ -207,6 +208,7 @@ export default function App() {
           
             {/* App Routes */}
             <Route path="/app/dashboard" element={<Dashboard />} />
+            <Route path="/app/user-profile" element={<UserProfile />} />
             <Route path="/app/*" element={<AppLayout><ComingSoon /></AppLayout>} />
             
             {/* Admin Routes - Protected */}

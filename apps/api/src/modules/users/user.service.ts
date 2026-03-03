@@ -82,15 +82,16 @@ export async function checkUserExists(email: string, fullName?: string) {
     return { exists: true, reason: 'email' };
   }
 
-  if (fullName) {
-    const existingProfile = await prisma.profiles.findFirst({
-      where: { full_name: fullName }
-    });
-    
-    if (existingProfile) {
-      return { exists: true, reason: 'name' };
-    }
-  }
+  // Name uniqueness check removed as per requirements
+  // if (fullName) {
+  //   const existingProfile = await prisma.profiles.findFirst({
+  //     where: { full_name: fullName }
+  //   });
+  //   
+  //   if (existingProfile) {
+  //     return { exists: true, reason: 'name' };
+  //   }
+  // }
 
   return { exists: false };
 }
@@ -136,6 +137,11 @@ export async function getProfile(userId: string) {
     prisma.profiles.findUnique({
       where: { id: userId },
       include: {
+        users: {
+          select: {
+            phone: true
+          }
+        },
         companion_profiles: true,
         subscriptions: {
           where: { status: 'active' },
@@ -174,6 +180,14 @@ export async function getProfile(userId: string) {
 
   if (!profileResult) return null;
 
+  console.log('Profile fetched:', {
+    userId,
+    phone: profileResult.phone,
+    pronouns: profileResult.pronouns,
+    timezone: profileResult.timezone,
+    users_phone: (profileResult as any).users?.phone
+  });
+
   const activeSubscription = profileResult.subscriptions[0];
   const latestEmergencyContact = profileResult.emergency_contacts[0];
   
@@ -191,6 +205,7 @@ export async function getProfile(userId: string) {
 
   const result = {
     ...profileResult,
+    phone: profileResult.phone || profileResult.users?.phone || null,
     emergency_contact_name: primaryContact?.name || profileResult.emergency_contact_name,
     emergency_contact_phone: primaryContact?.phone || profileResult.emergency_contact_phone,
     emergency_contact_relationship: primaryContact?.relationship || profileResult.emergency_contact_relationship,
@@ -234,6 +249,9 @@ export async function getCredits(userId: string) {
 
 export async function updateProfile(userId: string, data: UpdateProfileInput) {
   // console.log('Updating profile for user:', userId, 'Data:', data);
+
+  // Invalidate cache
+  userProfileCache.delete(userId);
 
   const { 
     emergency_contact_name, 
@@ -295,6 +313,9 @@ export async function completeOnboarding(userId: string, data: OnboardingInput) 
       role,
     },
   });
+
+  // Invalidate cache
+  userProfileCache.delete(userId);
 
   // If therapist, create/update therapist profile
   if (role === 'therapist') {
