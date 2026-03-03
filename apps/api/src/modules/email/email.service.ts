@@ -4,8 +4,15 @@ export class EmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
+    const host = process.env.SMTP_HOST || 'mail.marqnetworks.com';
+    const user = process.env.SMTP_USER;
+    
+    if (!user) {
+      console.warn('⚠️ SMTP_USER is not set. Email sending will likely fail.');
+    }
+
     this.transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'mail.marqnetworks.com',
+      host,
       port: parseInt(process.env.SMTP_PORT || '465'),
       secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
       name: process.env.SMTP_EHLO_DOMAIN, // Optional: useful for EHLO/HELO

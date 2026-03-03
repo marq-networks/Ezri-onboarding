@@ -2,6 +2,10 @@ import { FastifyInstance } from 'fastify';
 import { sendEmailHandler, sendResetPasswordHandler } from './email.controller';
 
 export async function emailRoutes(fastify: FastifyInstance) {
+  fastify.log.info('Registering email routes...');
+
+  fastify.get('/health', async () => ({ status: 'ok', service: 'email' }));
+
   fastify.post(
     '/send',
     {

@@ -49,10 +49,12 @@ export async function sendResetPasswordHandler(
     }
 
     if (!data.user) {
+        request.log.warn({ email }, 'User not found during password reset request');
         return reply.code(404).send({ message: 'User not found' });
     }
 
     const resetLink = data.properties.action_link;
+    request.log.info({ email }, 'Generated password reset link');
     
     // Nice HTML template
     const html = `
@@ -80,6 +82,7 @@ export async function sendResetPasswordHandler(
     
     await emailService.sendEmail(email, subject, html);
     
+    request.log.info({ email }, 'Password reset email sent successfully');
     return reply.code(200).send({ success: true, message: 'Password reset email sent successfully' });
 
   } catch (error: any) {
@@ -92,7 +95,12 @@ export async function sendResetPasswordHandler(
       });
     }
 
-    request.log.error({ error }, 'Failed to process reset password');
+    // Check for specific Supabase errors
+    if (error.status === 429) {
+      return reply.code(429).send({ message: 'Too many requests. Please try again later.' });
+    }
+
+    request.log.error({ error, message: error.message, stack: error.stack }, 'Failed to process reset password');
     return reply.code(500).send({ message: 'Failed to process request', error: error.message });
   }
 }
