@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 import authPlugin from './plugins/auth';
 import { userRoutes } from './modules/users/user.routes';
 import { emailRoutes } from './modules/email/email.routes';
+import { sendResetPasswordHandler } from './modules/email/email.controller'; // Direct import for fallback route
 import { systemSettingsRoutes } from './modules/system-settings/system-settings.routes';
 import { sessionRoutes } from './modules/sessions/sessions.routes';
 import { moodRoutes } from './modules/moods/moods.routes';
@@ -218,6 +219,9 @@ app.register(emergencyContactRoutes, { prefix: '/api/emergency-contacts' });
 app.register(notificationRoutes, { prefix: '/api/notifications' });
 app.register(aiAvatarsRoutes, { prefix: '/api/ai-avatars' });
 
+// Fallback Route Registration: Directly register the reset password route to bypass potential module/prefix issues
+app.post('/api/email/reset-password', sendResetPasswordHandler);
+
 // Health check routes
 app.get('/health', async () => ({ ok: true }));
 app.get('/api/health', async () => ({ ok: true }));
@@ -229,6 +233,26 @@ app.get('/api/debug-routes', async (request, reply) => {
   // For now, just return them as this is a non-critical info leak for debugging.
   const routes = app.printRoutes();
   return { routes };
+});
+
+// Custom 404 Handler to debug route mismatch
+app.setNotFoundHandler((request, reply) => {
+  request.log.warn({
+    method: request.method,
+    url: request.url,
+    headers: request.headers,
+    body: request.body
+  }, 'Route not found');
+
+  reply.code(404).send({
+    message: `Route ${request.method}:${request.url} not found`,
+    error: 'Not Found',
+    statusCode: 404,
+    debug: {
+      receivedUrl: request.url,
+      receivedMethod: request.method
+    }
+  });
 });
 
 export default app;
