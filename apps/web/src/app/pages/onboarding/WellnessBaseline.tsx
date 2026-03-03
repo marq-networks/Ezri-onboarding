@@ -42,17 +42,17 @@ export function OnboardingWellnessBaseline() {
 
   const handleContinue = () => {
     updateData({ currentMood, selectedGoals });
-    navigate("/onboarding/avatar-preferences");
+    navigate("/onboarding/health-background");
   };
 
   return (
     <OnboardingLayout
       currentStep={3}
-      totalSteps={8}
+      totalSteps={9}
       title="How Are You Feeling Today?"
       subtitle="This helps us understand where to focus our support"
       showBack={true}
-      onBack={() => navigate("/onboarding/subscription")}
+      onBack={() => navigate("/onboarding/profile-setup")}
     >
       <div className="space-y-8">
         {/* Current Mood */}
@@ -145,7 +145,7 @@ export function OnboardingWellnessBaseline() {
           transition={{ delay: 0.8 }}
           className="flex gap-3"
         >
-          <Link to="/onboarding/profile" className="flex-1">
+          <Link to="/onboarding/profile-setup" className="flex-1">
             <Button type="button" variant="outline" className="w-full group">
               <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
               Back

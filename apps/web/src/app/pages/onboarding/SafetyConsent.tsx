@@ -33,15 +33,15 @@ export function OnboardingSafetyConsent() {
     updateData({ agreedToSafety: true });
 
     // Continue to next onboarding step
-    navigate('/onboarding/emergency-contact');
+    navigate('/onboarding/subscription');
   };
 
   return (
     <OnboardingLayout
         title="Safety & Support"
         subtitle="Understanding how Ezri keeps you safe"
-        currentStep={6}
-        totalSteps={8}
+        currentStep={8}
+        totalSteps={9}
       >
       <div className="space-y-6 max-w-2xl mx-auto">
         {/* Main notice card */}
@@ -178,11 +178,11 @@ export function OnboardingSafetyConsent() {
         <div className="flex gap-4 pt-6">
           <Button
             variant="outline"
-            onClick={() => navigate('/onboarding/avatar-preferences')}
+            onClick={() => navigate('/onboarding/permissions')}
             className="flex-1"
           >
             Back
-          </Button>
+          </Button>>
           <Button
             onClick={handleContinue}
             disabled={!agreed}

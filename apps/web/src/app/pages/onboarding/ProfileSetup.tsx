@@ -159,7 +159,7 @@ export function OnboardingProfileSetup() {
         timezone 
       });
       
-      navigate("/onboarding/subscription");
+      navigate("/onboarding/wellness-baseline");
     } catch (error) {
       console.error("Profile update error:", error);
       toast.error("Failed to update profile");
@@ -177,7 +177,7 @@ export function OnboardingProfileSetup() {
   return (
     <OnboardingLayout
       currentStep={2}
-      totalSteps={8}
+      totalSteps={9}
       title="Tell Us About Yourself"
       subtitle="Help us personalize your Ezri experience"
     >

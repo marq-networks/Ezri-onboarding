@@ -28,7 +28,7 @@ export function OnboardingWelcome() {
   return (
     <OnboardingLayout
       currentStep={1}
-      totalSteps={8}
+      totalSteps={9}
       title="Welcome to Ezri! 👋"
       subtitle="Let's set up your personalized wellness experience"
     >
@@ -93,7 +93,7 @@ export function OnboardingWelcome() {
           transition={{ delay: 0.8 }}
           className="pt-4"
         >
-          <Link to="/onboarding/profile">
+          <Link to="/onboarding/profile-setup">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

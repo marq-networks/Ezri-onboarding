@@ -54,13 +54,13 @@ export function OnboardingSubscription() {
         // Update local profile/context if needed? 
         // The next page will likely fetch fresh data or we rely on backend.
         // Navigate to wellness baseline
-        navigate("/onboarding/wellness-baseline");
+        navigate("/onboarding/complete");
       } else {
         toast.info("Redirecting to checkout...");
         // For paid plans, redirect to Stripe
         // We need to provide full URL for success/cancel
         const origin = window.location.origin;
-        const successUrl = `${origin}/onboarding/wellness-baseline?session_id={CHECKOUT_SESSION_ID}`;
+        const successUrl = `${origin}/onboarding/complete?session_id={CHECKOUT_SESSION_ID}`;
         const cancelUrl = `${origin}/onboarding/subscription`;
 
         const result = await api.billing.createSubscription({
@@ -76,7 +76,7 @@ export function OnboardingSubscription() {
         } else if (result.subscription) {
           // Fallback if backend handled it without checkout (e.g. 100% coupon or error in logic)
           console.warn("Received subscription object for paid plan instead of checkout URL");
-          navigate("/onboarding/wellness-baseline");
+          navigate("/onboarding/complete");
         }
       }
     } catch (error) {
@@ -176,12 +176,12 @@ export function OnboardingSubscription() {
 
   return (
     <OnboardingLayout
-      currentStep={3}
-      totalSteps={8}
+      currentStep={9}
+      totalSteps={9}
       title="Choose Your Plan"
       subtitle="Select the plan that best fits your wellness journey"
       showBack={true}
-      onBack={() => navigate("/onboarding/profile")}
+      onBack={() => navigate("/onboarding/safety-consent")}
     >
       <div className="space-y-6">
         {viewMode === 'list' ? (

@@ -73,13 +73,13 @@ export function OnboardingPermissions() {
       permissions,
       notificationPreferences
     });
-    navigate("/onboarding/complete");
+    navigate("/onboarding/safety-consent");
   };
 
   return (
     <OnboardingLayout
-      currentStep={8}
-      totalSteps={8}
+      currentStep={7}
+      totalSteps={9}
       title="Permissions & Notifications"
       subtitle="Enable features to get the most out of Ezri"
     >
@@ -246,7 +246,7 @@ export function OnboardingPermissions() {
             </Button>
           </Link>
 
-          <Link to="/onboarding/complete" className="flex-1">
+          <div className="flex-1">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -267,7 +267,7 @@ export function OnboardingPermissions() {
                 />
               </Button>
             </motion.div>
-          </Link>
+          </div>
         </motion.div>
       </div>
     </OnboardingLayout>

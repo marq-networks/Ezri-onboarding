@@ -45,7 +45,7 @@ export function OnboardingHealthBackground() {
   return (
     <OnboardingLayout
       currentStep={4}
-      totalSteps={8}
+      totalSteps={9}
       title="Health Background"
       subtitle="This information helps us provide better support (all optional)"
     >
