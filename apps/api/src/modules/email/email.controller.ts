@@ -34,7 +34,12 @@ export async function sendResetPasswordHandler(
   reply: FastifyReply
 ) {
   try {
-    request.log.info({ body: request.body }, 'Processing password reset request');
+    request.log.info({ 
+      body: request.body, 
+      url: request.url, 
+      headers: request.headers 
+    }, 'Processing password reset request');
+
     const rawBody = request.body;
     // Trim string inputs to avoid validation/processing errors
     const email = rawBody.email.trim();

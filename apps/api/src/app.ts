@@ -219,12 +219,15 @@ app.register(emergencyContactRoutes, { prefix: '/api/emergency-contacts' });
 app.register(notificationRoutes, { prefix: '/api/notifications' });
 app.register(aiAvatarsRoutes, { prefix: '/api/ai-avatars' });
 
-// Fallback Route Registration: Directly register the reset password route to bypass potential module/prefix issues
-app.post('/api/email/reset-password', sendResetPasswordHandler);
+// Fallback Route Registration: Register at multiple paths to catch any Vercel rewriting issues
+const resetHandler = sendResetPasswordHandler;
+app.post('/api/email/reset-password', resetHandler);
+app.post('/email/reset-password', resetHandler); // In case /api is stripped
+app.post('/reset-password', resetHandler); // In case /api/email is stripped (unlikely)
 
 // Health check routes
-app.get('/health', async () => ({ ok: true }));
-app.get('/api/health', async () => ({ ok: true }));
+app.get('/health', async () => ({ ok: true, version: '1.0.1-debug', timestamp: new Date().toISOString() }));
+app.get('/api/health', async () => ({ ok: true, version: '1.0.1-debug', timestamp: new Date().toISOString() }));
 app.get('/', async () => ({ message: 'MeetEzri API' }));
 
 // Debug route to list registered routes (for troubleshooting Vercel deployment)
